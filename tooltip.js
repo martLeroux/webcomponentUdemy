@@ -8,18 +8,32 @@ class Tooltip extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 div {
+                    font-weight: normal;
                     background-color: black;
                     color: white;
                     position: absolute;
+                    top: 2.5rem;
+                    left: 0.75rem;
                     z-index: 10;
+                    padding: 0.15rem;
+                    border-radius: 3px;
+                    box-shadow: 1px 1px 6px rgba(0,0,0,0.26);
                 }
 
+                /*Pour stylyser les tooltip (la racine)*/
                 :host{
                     background: #eee;
+                    padding: 0.15rem;
                 }
 
+                /*Pour stylyser les tooltip dans un p*/
+                :host-context(p) {
+                    font-weight: bold;
+                }
+
+                /*Pour stylyser les tooltip avec l'attribut appearace="primary"*/
                 :host([appearance="primary"]) {
-                    background:blue;
+                    background: var(--color-primary, #eee);
                 }
 
                 ::slotted(.highlight) {
