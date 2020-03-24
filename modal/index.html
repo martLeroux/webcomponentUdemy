@@ -18,14 +18,27 @@
     </style>
 </head>
 <body>
-    <dsc-modal>Allo</dsc-modal>
+    <dsc-modal>
+        <h1 slot="title">Titre</h1>
+        Content
+    </dsc-modal>
     <p>Please confirm your choice.</p>
     <button>Show details & confirm.</button>
     <script>
         const confirmButton = document.querySelector('button');
         const modal = document.querySelector('dsc-modal');
+
+        modal.addEventListener('confirm', () => {
+            console.log('Confirmed...');
+        });
+
+        modal.addEventListener('cancel', () => {
+            console.log('Cancelled...');
+        });
+
         confirmButton.addEventListener('click', () => {
-            modal.setAttribute('opened', '');
+            //modal.setAttribute('opened', '');
+            modal.open();
         });
     </script>
 </body>
