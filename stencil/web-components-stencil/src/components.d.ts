@@ -10,7 +10,10 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface DscSideDrawer {}
+  interface DscSideDrawer {
+    'open': boolean;
+    'title': string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -48,7 +51,10 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface DscSideDrawer {}
+  interface DscSideDrawer {
+    'open'?: boolean;
+    'title'?: string;
+  }
   interface MyComponent {
     /**
     * The first name
