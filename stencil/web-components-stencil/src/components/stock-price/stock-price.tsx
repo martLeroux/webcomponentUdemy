@@ -26,21 +26,21 @@ export class StockPrice extends HTMLButtonElement {
     }
 
     componentWillLoad() {
-        
         console.log('componentWillLoad');
     }
 
     componentWillUpdate() {
         console.log('componentWillUpdate');
+        
+    }
+
+    componentDidUpdate() {
+        console.log('componentDidUpdate');
         if (this.stockSymbol !== this.initialStockSymbol) {
             this.initialStockSymbol = this.stockSymbol;
             this.fetchStockPrice(this.stockSymbol);
             this.stockUserInput = this.stockSymbol;
         } 
-    }
-
-    componentDidUpdate() {
-        console.log('componentDidUpdate');
     }
 
     componentDidUnload() {
