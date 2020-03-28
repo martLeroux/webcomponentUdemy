@@ -15,6 +15,7 @@ export namespace Components {
     'opened': boolean;
     'title': string;
   }
+  interface DscStockFinder {}
   interface DscStockPrice {
     'stockSymbol': string;
   }
@@ -46,6 +47,12 @@ declare global {
     new (): HTMLDscSideDrawerElement;
   };
 
+  interface HTMLDscStockFinderElement extends Components.DscStockFinder, HTMLStencilElement {}
+  var HTMLDscStockFinderElement: {
+    prototype: HTMLDscStockFinderElement;
+    new (): HTMLDscStockFinderElement;
+  };
+
   interface HTMLDscStockPriceElement extends Components.DscStockPrice, HTMLStencilElement {}
   var HTMLDscStockPriceElement: {
     prototype: HTMLDscStockPriceElement;
@@ -65,6 +72,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'dsc-side-drawer': HTMLDscSideDrawerElement;
+    'dsc-stock-finder': HTMLDscStockFinderElement;
     'dsc-stock-price': HTMLDscStockPriceElement;
     'my-component': HTMLMyComponentElement;
     'uc-tooltip': HTMLUcTooltipElement;
@@ -75,6 +83,9 @@ declare namespace LocalJSX {
   interface DscSideDrawer {
     'opened'?: boolean;
     'title'?: string;
+  }
+  interface DscStockFinder {
+    'onDscSymbolSelected'?: (event: CustomEvent<string>) => void;
   }
   interface DscStockPrice {
     'stockSymbol'?: string;
@@ -99,6 +110,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'dsc-side-drawer': DscSideDrawer;
+    'dsc-stock-finder': DscStockFinder;
     'dsc-stock-price': DscStockPrice;
     'my-component': MyComponent;
     'uc-tooltip': UcTooltip;
@@ -112,6 +124,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'dsc-side-drawer': LocalJSX.DscSideDrawer & JSXBase.HTMLAttributes<HTMLDscSideDrawerElement>;
+      'dsc-stock-finder': LocalJSX.DscStockFinder & JSXBase.HTMLAttributes<HTMLDscStockFinderElement>;
       'dsc-stock-price': LocalJSX.DscStockPrice & JSXBase.HTMLAttributes<HTMLDscStockPriceElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
       'uc-tooltip': LocalJSX.UcTooltip & JSXBase.HTMLAttributes<HTMLUcTooltipElement>;
