@@ -11,7 +11,8 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface DscSideDrawer {
-    'open': boolean;
+    'open': () => Promise<void>;
+    'opened': boolean;
     'title': string;
   }
   interface MyComponent {
@@ -27,6 +28,9 @@ export namespace Components {
     * The middle name
     */
     'middle': string;
+  }
+  interface UcTooltip {
+    'text': string;
   }
 }
 
@@ -44,15 +48,22 @@ declare global {
     prototype: HTMLMyComponentElement;
     new (): HTMLMyComponentElement;
   };
+
+  interface HTMLUcTooltipElement extends Components.UcTooltip, HTMLStencilElement {}
+  var HTMLUcTooltipElement: {
+    prototype: HTMLUcTooltipElement;
+    new (): HTMLUcTooltipElement;
+  };
   interface HTMLElementTagNameMap {
     'dsc-side-drawer': HTMLDscSideDrawerElement;
     'my-component': HTMLMyComponentElement;
+    'uc-tooltip': HTMLUcTooltipElement;
   }
 }
 
 declare namespace LocalJSX {
   interface DscSideDrawer {
-    'open'?: boolean;
+    'opened'?: boolean;
     'title'?: string;
   }
   interface MyComponent {
@@ -69,10 +80,14 @@ declare namespace LocalJSX {
     */
     'middle'?: string;
   }
+  interface UcTooltip {
+    'text'?: string;
+  }
 
   interface IntrinsicElements {
     'dsc-side-drawer': DscSideDrawer;
     'my-component': MyComponent;
+    'uc-tooltip': UcTooltip;
   }
 }
 
@@ -84,6 +99,7 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'dsc-side-drawer': LocalJSX.DscSideDrawer & JSXBase.HTMLAttributes<HTMLDscSideDrawerElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+      'uc-tooltip': LocalJSX.UcTooltip & JSXBase.HTMLAttributes<HTMLUcTooltipElement>;
     }
   }
 }
