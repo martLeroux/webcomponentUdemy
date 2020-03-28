@@ -15,6 +15,7 @@ export namespace Components {
     'opened': boolean;
     'title': string;
   }
+  interface DscStockPrice {}
   interface MyComponent {
     /**
     * The first name
@@ -43,6 +44,12 @@ declare global {
     new (): HTMLDscSideDrawerElement;
   };
 
+  interface HTMLDscStockPriceElement extends Components.DscStockPrice, HTMLStencilElement {}
+  var HTMLDscStockPriceElement: {
+    prototype: HTMLDscStockPriceElement;
+    new (): HTMLDscStockPriceElement;
+  };
+
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
@@ -56,6 +63,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'dsc-side-drawer': HTMLDscSideDrawerElement;
+    'dsc-stock-price': HTMLDscStockPriceElement;
     'my-component': HTMLMyComponentElement;
     'uc-tooltip': HTMLUcTooltipElement;
   }
@@ -66,6 +74,7 @@ declare namespace LocalJSX {
     'opened'?: boolean;
     'title'?: string;
   }
+  interface DscStockPrice {}
   interface MyComponent {
     /**
     * The first name
@@ -86,6 +95,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'dsc-side-drawer': DscSideDrawer;
+    'dsc-stock-price': DscStockPrice;
     'my-component': MyComponent;
     'uc-tooltip': UcTooltip;
   }
@@ -98,6 +108,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'dsc-side-drawer': LocalJSX.DscSideDrawer & JSXBase.HTMLAttributes<HTMLDscSideDrawerElement>;
+      'dsc-stock-price': LocalJSX.DscStockPrice & JSXBase.HTMLAttributes<HTMLDscStockPriceElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
       'uc-tooltip': LocalJSX.UcTooltip & JSXBase.HTMLAttributes<HTMLUcTooltipElement>;
     }
