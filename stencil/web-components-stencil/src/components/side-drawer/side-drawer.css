@@ -35,3 +35,32 @@ header button {
     border: none;
     font-size: 1.5rem
 }
+
+#tabs {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+#tabs button {
+    width: 30%;
+    background: white;
+    color: black;
+    text-align: center;
+    border: 1px solid black;
+    padding: 0.15rem 0;
+}
+
+#tabs button.active,
+#tabs button:hover {
+    background: black;
+    color: white;
+}
+
+#tabs button:focus {
+    outline: none;
+}
+
+#contact-information {
+    padding: 0 1rem;
+}
