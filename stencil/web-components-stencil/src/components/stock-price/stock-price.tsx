@@ -1,4 +1,4 @@
-import { Component, h, State, Element } from "@stencil/core";
+import { Component, h, State, Element, Prop } from "@stencil/core";
 import { AV_API_KEY } from '../../global/global';
 
 @Component({
@@ -6,27 +6,48 @@ import { AV_API_KEY } from '../../global/global';
     styleUrl: './stock-price.css',
     shadow: true
 })
-export class StockPrice {
+export class StockPrice extends HTMLButtonElement {
     stockInput: HTMLInputElement;
+    initialStockSymbol: string;
     @Element() el: HTMLElement;
     @State() fetchedPrice: number;
     @State() stockUserInput: string;
     @State() stockInputValid = false;
     @State() error = '';
 
-    onUserInput(event: Event) {
-        this.stockUserInput = (event.target as HTMLInputElement).value;
-        if (this.stockUserInput.trim() !== '' ) {
-            this.stockInputValid = true;
-        } else {
-            this.stockInputValid =false;
-        }
+    @Prop() stockSymbol: string;
+
+    componentDidLoad() {
+        if (this.stockSymbol) {
+            this.initialStockSymbol = this.stockSymbol;
+            this.fetchStockPrice(this.stockSymbol);
+            this.stockUserInput = this.stockSymbol;
+        } 
     }
 
-    onFetchStockPrice(event) {
-        event.preventDefault();
-        //const stockSymbol = (this.el.shadowRoot.querySelector("#stock-symbol") as HTMLInputElement).value;
-        const stockSymbol = this.stockInput.value;
+    componentWillLoad() {
+        
+        console.log('componentWillLoad');
+    }
+
+    componentWillUpdate() {
+        console.log('componentWillUpdate');
+        if (this.stockSymbol !== this.initialStockSymbol) {
+            this.initialStockSymbol = this.stockSymbol;
+            this.fetchStockPrice(this.stockSymbol);
+            this.stockUserInput = this.stockSymbol;
+        } 
+    }
+
+    componentDidUpdate() {
+        console.log('componentDidUpdate');
+    }
+
+    componentDidUnload() {
+        console.log('componentDidUnload');
+    }
+
+    fetchStockPrice(stockSymbol: string) {
         fetch(
             `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockSymbol}&apikey=${AV_API_KEY}`
         )
@@ -44,6 +65,22 @@ export class StockPrice {
             console.log(err);
             this.error = err.message;
         });
+    }
+
+    onUserInput(event: Event) {
+        this.stockUserInput = (event.target as HTMLInputElement).value;
+        if (this.stockUserInput.trim() !== '' ) {
+            this.stockInputValid = true;
+        } else {
+            this.stockInputValid =false;
+        }
+    }
+
+    onFetchStockPrice(event) {
+        event.preventDefault();
+        //const stockSymbol = (this.el.shadowRoot.querySelector("#stock-symbol") as HTMLInputElement).value;
+        const stockSymbol = this.stockInput.value;
+        this.fetchStockPrice(stockSymbol);
     }
 
 

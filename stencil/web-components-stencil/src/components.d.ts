@@ -15,7 +15,9 @@ export namespace Components {
     'opened': boolean;
     'title': string;
   }
-  interface DscStockPrice {}
+  interface DscStockPrice {
+    'stockSymbol': string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -74,7 +76,9 @@ declare namespace LocalJSX {
     'opened'?: boolean;
     'title'?: string;
   }
-  interface DscStockPrice {}
+  interface DscStockPrice {
+    'stockSymbol'?: string;
+  }
   interface MyComponent {
     /**
     * The first name
