@@ -1,13 +1,27 @@
-import { r as registerInstance, c as createEvent, h, g as getElement, H as Host } from './core-d8a25c48.js';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+const core = require('./core-38c9c5cc.js');
+
+const Spinner = class {
+    constructor(hostRef) {
+        core.registerInstance(this, hostRef);
+    }
+    render() {
+        return (core.h("div", { class: "lds-ring" }, core.h("div", null), core.h("div", null), core.h("div", null), core.h("div", null)));
+    }
+    static get style() { return ".lds-ring{display:inline-block;position:relative;width:64px;height:64px}.lds-ring div{-webkit-box-sizing:border-box;box-sizing:border-box;display:block;position:absolute;width:51px;height:51px;margin:6px;border:6px solid #3b013b;border-radius:50%;-webkit-animation:lds-ring 1.2s cubic-bezier(.5,0,.5,1) infinite;animation:lds-ring 1.2s cubic-bezier(.5,0,.5,1) infinite;border-color:#3b013b transparent transparent transparent}.lds-ring div:first-child{-webkit-animation-delay:-.45s;animation-delay:-.45s}.lds-ring div:nth-child(2){-webkit-animation-delay:-.3s;animation-delay:-.3s}.lds-ring div:nth-child(3){-webkit-animation-delay:-.15s;animation-delay:-.15s}\@-webkit-keyframes lds-ring{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@keyframes lds-ring{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}"; }
+};
 
 const AV_API_KEY = 'OHFCVT0L7HZZCDA8';
 
 const StockFinder = class {
     constructor(hostRef) {
-        registerInstance(this, hostRef);
+        core.registerInstance(this, hostRef);
         this.searchResults = [];
         this.loading = false;
-        this.dscSymbolSelected = createEvent(this, "dscSymbolSelected", 7);
+        this.dscSymbolSelected = core.createEvent(this, "dscSymbolSelected", 7);
     }
     onFindStock(event) {
         this.loading = true;
@@ -30,12 +44,12 @@ const StockFinder = class {
         this.dscSymbolSelected.emit(symbol);
     }
     render() {
-        let content = h("ul", null, this.searchResults.map(result => (h("li", { onClick: this.onSelectSymbol.bind(this, result.symbol) }, h("strong", null, result.symbol), " - ", result.name))));
+        let content = core.h("ul", null, this.searchResults.map(result => (core.h("li", { onClick: this.onSelectSymbol.bind(this, result.symbol) }, core.h("strong", null, result.symbol), " - ", result.name))));
         if (this.loading) {
-            content = h("dsc-spinner", null);
+            content = core.h("dsc-spinner", null);
         }
         return [
-            h("form", { onSubmit: this.onFindStock.bind(this) }, h("input", { id: "stock-symbol", ref: el => this.stockNameInput = el }), h("button", { type: "submit" }, "Find")),
+            core.h("form", { onSubmit: this.onFindStock.bind(this) }, core.h("input", { id: "stock-symbol", ref: el => this.stockNameInput = el }), core.h("button", { type: "submit" }, "Find")),
             content
         ];
     }
@@ -44,7 +58,7 @@ const StockFinder = class {
 
 const StockPrice = class {
     constructor(hostRef) {
-        registerInstance(this, hostRef);
+        core.registerInstance(this, hostRef);
         this.stockInputValid = false;
         this.error = '';
         this.loading = true;
@@ -126,27 +140,29 @@ const StockPrice = class {
             } };
     }
     __stencil_render() {
-        let dataContent = h("p", null, "Please enter a stock symbol");
+        let dataContent = core.h("p", null, "Please enter a stock symbol");
         if (this.fetchedPrice) {
-            dataContent = h("p", null, "Price: $", this.fetchedPrice);
+            dataContent = core.h("p", null, "Price: $", this.fetchedPrice);
         }
         if (this.error) {
-            dataContent = h("p", null, this.error);
+            dataContent = core.h("p", null, this.error);
         }
         if (this.loading) {
-            dataContent = h("dsc-spinner", null);
+            dataContent = core.h("dsc-spinner", null);
         }
         return [
-            h("form", { onSubmit: this.onFetchStockPrice.bind(this) }, h("input", { id: "stock-symbol", ref: el => this.stockInput = el, value: this.stockUserInput, onInput: this.onUserInput.bind(this) }), h("button", { type: "submit", disabled: !this.stockInputValid || this.loading }, "Fetch")),
-            h("div", null, dataContent)
+            core.h("form", { onSubmit: this.onFetchStockPrice.bind(this) }, core.h("input", { id: "stock-symbol", ref: el => this.stockInput = el, value: this.stockUserInput, onInput: this.onUserInput.bind(this) }), core.h("button", { type: "submit", disabled: !this.stockInputValid || this.loading }, "Fetch")),
+            core.h("div", null, dataContent)
         ];
     }
-    get el() { return getElement(this); }
+    get el() { return core.getElement(this); }
     static get watchers() { return {
         "stockSymbol": ["stockSymbolChanged"]
     }; }
-    render() { return h(Host, this.hostData(), this.__stencil_render()); }
+    render() { return core.h(core.Host, this.hostData(), this.__stencil_render()); }
     static get style() { return ":host{font-family:sans-serif;border:2px solid #3b013b;margin:2rem;padding:1rem;display:block;width:20rem;max-width:100%}:host(.error){border-color:#e79804}form input{font:inherit;color:#3b013b;padding:.1rem .25rem;display:block;margin-bottom:.5rem}form button:focus,form input:focus{outline:none}form button{font:inherit;padding:.25rem .5rem;border:1px solid #3b013b;background:#3b013b;color:#fff;cursor:pointer}form button:active,form button:hover{background:#750175;border-color:#750175}form button:disabled{background:#ccc;border-color:#ccc;color:#fff;cursor:not-allowed}"; }
 };
 
-export { StockFinder as dsc_stock_finder, StockPrice as dsc_stock_price };
+exports.dsc_spinner = Spinner;
+exports.dsc_stock_finder = StockFinder;
+exports.dsc_stock_price = StockPrice;

@@ -1,10 +1,11 @@
 {
   "entries": [
+    "components/spinner/spinner.js",
     "components/stock-finder/stock-finder.js",
+    "components/side-drawer/side-drawer.js",
     "components/stock-price/stock-price.js",
-    "components/my-component/my-component.js",
     "components/tooltip/tooltip.js",
-    "components/side-drawer/side-drawer.js"
+    "components/my-component/my-component.js"
   ],
   "compiler": {
     "name": "@stencil/core",

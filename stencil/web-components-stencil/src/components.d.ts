@@ -15,6 +15,7 @@ export namespace Components {
     'opened': boolean;
     'title': string;
   }
+  interface DscSpinner {}
   interface DscStockFinder {}
   interface DscStockPrice {
     'stockSymbol': string;
@@ -47,6 +48,12 @@ declare global {
     new (): HTMLDscSideDrawerElement;
   };
 
+  interface HTMLDscSpinnerElement extends Components.DscSpinner, HTMLStencilElement {}
+  var HTMLDscSpinnerElement: {
+    prototype: HTMLDscSpinnerElement;
+    new (): HTMLDscSpinnerElement;
+  };
+
   interface HTMLDscStockFinderElement extends Components.DscStockFinder, HTMLStencilElement {}
   var HTMLDscStockFinderElement: {
     prototype: HTMLDscStockFinderElement;
@@ -72,6 +79,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'dsc-side-drawer': HTMLDscSideDrawerElement;
+    'dsc-spinner': HTMLDscSpinnerElement;
     'dsc-stock-finder': HTMLDscStockFinderElement;
     'dsc-stock-price': HTMLDscStockPriceElement;
     'my-component': HTMLMyComponentElement;
@@ -84,6 +92,7 @@ declare namespace LocalJSX {
     'opened'?: boolean;
     'title'?: string;
   }
+  interface DscSpinner {}
   interface DscStockFinder {
     'onDscSymbolSelected'?: (event: CustomEvent<string>) => void;
   }
@@ -110,6 +119,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'dsc-side-drawer': DscSideDrawer;
+    'dsc-spinner': DscSpinner;
     'dsc-stock-finder': DscStockFinder;
     'dsc-stock-price': DscStockPrice;
     'my-component': MyComponent;
@@ -124,6 +134,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'dsc-side-drawer': LocalJSX.DscSideDrawer & JSXBase.HTMLAttributes<HTMLDscSideDrawerElement>;
+      'dsc-spinner': LocalJSX.DscSpinner & JSXBase.HTMLAttributes<HTMLDscSpinnerElement>;
       'dsc-stock-finder': LocalJSX.DscStockFinder & JSXBase.HTMLAttributes<HTMLDscStockFinderElement>;
       'dsc-stock-price': LocalJSX.DscStockPrice & JSXBase.HTMLAttributes<HTMLDscStockPriceElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
