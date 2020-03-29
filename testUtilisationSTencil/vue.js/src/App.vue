@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <dsc-stock-finder></dsc-stock-finder>
+    <dsc-stock-price stock-symbol="AAPL"></dsc-stock-price>
   </div>
 </template>
 
